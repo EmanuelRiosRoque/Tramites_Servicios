@@ -51,6 +51,16 @@
                             Registro Trámites/Servicios
                         </a>
                     @endunlessrole
+
+                    @role("Administrador")
+                        <a 
+                            href="{{ route('consulta.usuarios') }}"
+                            class="px-4 py-2 rounded-md shadow transition cursor-pointer 
+                                {{ request()->routeIs('consulta.usuarios') ? 'bg-emerald-400 text-white' : 'bg-white text-teal-700 hover:bg-gray-100' }}"
+                        >
+                            Usuarios
+                        </a>
+                    @endrole
                 </div>
 
                 <form method="POST" action="{{ route('logout') }}" x-data>
