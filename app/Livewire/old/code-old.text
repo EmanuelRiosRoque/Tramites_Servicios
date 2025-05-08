@@ -1,0 +1,80 @@
+// public function validarYAvanzarTab($tabActual)
+    // {
+    //     try {
+    //         match ($tabActual) {
+    //             'datos' => $this->validate([
+    //                 'formData.modalidad' => 'required|string|max:255',
+    //                 'formData.nombreTramite' => 'required|string|max:255',
+    //                 'formData.descripcionTramite' => 'required|string|max:255',
+    //             ]),
+    //             'pasos' => $this->validate([
+    //                 'formData.pasos' => 'required|array|min:1',
+    //             ]),
+    //             'requisitos' => $this->validate([
+    //                 'formData.requisitos' => 'required|array|min:1',
+    //                 'formData.fundamentos' => 'required|array|min:1',
+    //             ]),
+    //             'documentos' => $this->validate([
+    //                 'formData.documentosRequeridos' => 'nullable',
+    //             ]),
+    //             'formatos' => $this->validate([
+    //                 'formData.formatoRequerido' => 'nullable',
+    //                 'formData.formatosRequeridos' => $this->formData['formatoRequerido'] == 1 ? 'required|array|min:1' : 'nullable',
+    //                 'formData.tipoFormato' => $this->formData['formatoRequerido'] == 1 ? 'required|string|max:255' : 'nullable',
+    //                 'formData.fundamentoFormato' => $this->formData['formatoRequerido'] == 1 ? 'required|string|max:255' : 'nullable',
+    //             ]),
+    //             'verificacion' => $this->validate([
+    //                 'formData.requiereInspeccion' => 'required',
+    //                 'formData.objetivoInspeccion' => $this->formData['requiereInspeccion'] == 1 ? 'required|string|max:255' : 'nullable',
+    //                 'formData.fundamentoInspeccion' => $this->formData['requiereInspeccion'] == 1 ? 'required|string|max:255' : 'nullable',
+    //             ]),
+    //             'plazo' => $this->validate([
+    //                 'formData.plazo' => 'required|string|max:255',
+    //                 'formData.plazoSujeto' => 'required|string|max:255',
+    //                 'formData.plazoSolicitante' => 'required|string|max:255',
+    //                 'formData.fundamentosPlazo' => 'required|array|min:1',
+    //             ]),
+    //             'monto' => $this->validate([
+    //                 'formData.montos' => 'required|array|min:1',
+    //                 'formData.fundamentoMonto' => 'required|string|max:255',
+    //             ]),
+    //             'vigencia' => $this->validate([
+    //                 'formData.vigencia' => 'required|string|max:255',
+    //                 'formData.fundamentoVigencia' => 'required|string|max:255',
+    //             ]),
+    //             'criterio' => $this->validate([
+    //                 'formData.criterio' => 'required|string|max:255',
+    //                 'formData.fundamentoCriterio' => 'required|string|max:255',
+    //             ]),
+    //             'unidad' => $this->validate([
+    //                 'formData.domicilios' => 'required|array|min:1',
+    //                 'formData.horarios' => 'required|array|min:1',
+    //             ]),
+    //             'otrosMedios' => $this->validate([
+    //                 'formData.telefonos' => 'required|array|min:1',
+    //                 'formData.correos' => 'required|array|min:1',
+    //                 'formData.sitiosWebs' => 'required|array|min:1',
+    //                 'formData.demasDatosRelativos' => 'required|string|max:255',
+    //             ]),
+    //             'informacion' => $this->validate([
+    //                 'formData.informacion' => 'required|string|max:255',
+    //                 'formData.fundamentoInformacion' => 'required|string|max:255',
+    //             ]),
+    //             'estrategia' => $this->validate([
+    //                 'formData.tramiteEnLinea' => 'required',
+    //                 'formData.cargarDocumentos' => 'required',
+    //                 'formData.seguimiento' => 'required',
+    //                 'formData.informacionMedios' => 'required',
+    //                 'formData.respuestaResolucion' => 'required',
+    //                 'formData.utilizaFirma' => 'required',
+    //                 'formData.realizarNotificaciones' => 'required',
+    //                 'formData.demasInformacion' => 'required',
+    //             ]),
+    //         };
+
+    //         return true; // ✅ Si valida bien
+    //     } catch (\Illuminate\Validation\ValidationException $e) {
+    //         $this->addError('global', 'Completa los datos de este apartado antes de continuar.');
+    //         return false; // ❌ Si falla
+    //     }
+    // }
