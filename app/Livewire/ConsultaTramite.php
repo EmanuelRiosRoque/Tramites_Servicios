@@ -35,13 +35,14 @@ class ConsultaTramite extends Component
     {
         $query = TramiteServicio::query()
             ->where('fk_estatus', Auth::user()->hasRole('Revisor') ? 2 : '>=', 1);
-
+    
         if ($this->filtro !== 'todos') {
             $query->whereJsonContains('tipo', $this->filtro);
         }
-
-        $this->tramites = $query->get(); // 👈 Aquí llenas la propiedad pública
+    
+        $this->tramites = $query->latest()->get(); // 👈 Ordena por created_at DESC
         
         return view('livewire.consulta-tramite');
     }
+    
 }

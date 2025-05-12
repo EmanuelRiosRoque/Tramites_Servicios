@@ -16,7 +16,7 @@
                 class="flex items-center gap-2 px-3 py-2 rounded transition 
                     {{ $origen === '1' ? 'bg-yellow-100 text-yellow-800 font-bold' : 'text-gray-700 hover:text-yellow-600' }}">
                 ...
-                <span>PJCDMX</span>
+                <span>TSJCDMX</span>
             </button>
 
             <button wire:click="setOrigen('2')" 

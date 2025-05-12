@@ -60,81 +60,97 @@
 
 
             <div x-show="tab === 'estrategia'" class="w-full flex justify-end mt-6 mb-6">
-                <div class="flex flex-wrap items-center gap-4">
+                <div class="w-full max-w-6xl">
+                    {{-- Formulario de Rechazo --}}
                     @if ($mostrarMotivoRechazo)
-                    <div class="items-center gap-4 w-full">
-                        <x-form.input wire:model="descripcion_rechazo" name="descripcion_rechazo"
-                            label="Motivo del Rechazo" placeholder="Describa el motivo del rechazo" />
-                        <button type="button" wire:click="rechazar" wire:loading.attr="disabled"
-                            class="bg-red-700 hover:bg-red-800 text-white font-semibold py-3 px-6 rounded shadow flex items-center justify-center gap-2">
-                            Confirmar Rechazo
-                        </button>
-                    </div>
-                    @endif
-                    @if ($fk_estatus == 1 || $fk_estatus == 3)
-                    <button type="button" @click="enviarFormularioAccion('enviarRevision')"
-                        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded shadow flex items-center gap-2"
-                        wire:loading.attr="disabled" wire:target="enviarRevision">
-                        <span wire:loading.remove wire:target="enviarRevision">Enviar a Revisión</span>
+                        <div class="w-full mb-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                            {{-- Input grande al 70% en pantallas md y mayores --}}
+                            <div class="w-full md:w-[70%]">
+                                <x-form.input 
+                                    wire:model="descripcion_rechazo" 
+                                    name="descripcion_rechazo"
+                                    label="Motivo del Rechazo" 
+                                    placeholder="Describa el motivo del rechazo" 
+                                />
+                            </div>
 
-                        <span wire:loading wire:target="enviarRevision" class="flex items-center gap-2">
-                            <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                                    stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z">
-                                </path>
-                            </svg>
-                        </span>
-                    </button>
-
-                    <button type="button" @click="enviarFormularioAccion('submit')"
-                        class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-6 rounded shadow flex items-center gap-2"
-                        wire:loading.attr="disabled" wire:target="submit">
-                        <span wire:loading.remove wire:target="submit">Guardar</span>
-
-                        <span wire:loading wire:target="submit" class="flex items-center gap-2">
-                            <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
-                                    stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z">
-                                </path>
-                            </svg>
-                        </span>
-                    </button>
+                            {{-- Botón alineado a la derecha --}}
+                            <div class="w-full md:w-auto">
+                                <button 
+                                    type="button" 
+                                    wire:click="rechazar" 
+                                    wire:loading.attr="disabled"
+                                    class="w-full md:w-auto bg-red-700 hover:bg-red-800 text-white font-semibold py-3 px-6 rounded shadow flex items-center justify-center gap-2"
+                                >
+                                    Confirmar Rechazo
+                                </button>
+                            </div>
+                        </div>
                     @endif
 
-
-                    @if (auth()->user()->hasRole('Revisor') && $fk_estatus == 2)
-                    {{-- Botón Rechazar --}}
-                    <button type="button" wire:click="$set('mostrarMotivoRechazo', true)"
-                        class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded shadow">
-                        Rechazar
-                    </button>
-
-                    {{-- Botón Aceptar y Publicar --}}
-                    <button type="button" wire:click="publicar"
-                        class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded shadow flex items-center gap-2"
-                        wire:loading.attr="disabled" wire:target="publicar">
-                        <svg wire:loading wire:target="publicar" class="animate-spin h-4 w-4 text-white" fill="none"
-                            viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
-                            </circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-                        </svg>
-                        <span wire:loading.remove wire:target="publicar">Aceptar y Publicar</span>
-                    </button>
+                    {{-- Botones principales, alineados a la derecha --}}
+                    @if (!$mostrarMotivoRechazo)
+                        <div class="flex justify-end gap-4 flex-wrap">
+                            @if ($fk_estatus == 1 || $fk_estatus == 3)
+                                <button type="button" @click="enviarFormularioAccion('enviarRevision')"
+                                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded shadow flex items-center gap-2"
+                                    wire:loading.attr="disabled" wire:target="enviarRevision">
+                                    <span wire:loading.remove wire:target="enviarRevision">Enviar a Revisión</span>
+                                    <span wire:loading wire:target="enviarRevision" class="flex items-center gap-2">
+                                        <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+                                            <path class="opacity-75" fill="currentColor"
+                                                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                                        </svg>
+                                    </span>
+                                </button>
+            
+                                <button type="button" @click="enviarFormularioAccion('submit')"
+                                    class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-6 rounded shadow flex items-center gap-2"
+                                    wire:loading.attr="disabled" wire:target="submit">
+                                    <span wire:loading.remove wire:target="submit">Guardar</span>
+                                    <span wire:loading wire:target="submit" class="flex items-center gap-2">
+                                        <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+                                            <path class="opacity-75" fill="currentColor"
+                                                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                                        </svg>
+                                    </span>
+                                </button>
+                            @endif
+            
+                            @if (auth()->user()->hasRole('Revisor') && $fk_estatus == 2)
+                                <button type="button" wire:click="$set('mostrarMotivoRechazo', true)"
+                                    class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded shadow">
+                                    Rechazar
+                                </button>
+            
+                                <button type="button" wire:click="publicar"
+                                    class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded shadow flex items-center gap-2"
+                                    wire:loading.attr="disabled" wire:target="publicar">
+                                    <svg wire:loading wire:target="publicar" class="animate-spin h-4 w-4 text-white" fill="none"
+                                        viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+                                        <path class="opacity-75" fill="currentColor"
+                                            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                                    </svg>
+                                    <span wire:loading.remove wire:target="publicar">Aceptar y Publicar</span>
+                                </button>
+                            @endif
+            
+                            <a href="{{ route('vista.consulta', ['id' => $tramiteServicioId]) }}" target="_blank"
+                                class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded shadow inline-block text-center"
+                                wire:loading.attr="disabled" wire:target="submit">
+                                Vista Previa
+                            </a>
+                        </div>
                     @endif
-
-
-                    <a href="{{ route('vista.consulta', ['id' => $tramiteServicioId]) }}" target="_blank"
-                        class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded shadow inline-block text-center"
-                        wire:loading.attr="disabled" wire:target="submit">
-                        Vista Previa
-                    </a>
                 </div>
             </div>
+            
+
         </div>
     </div>
 </div>

@@ -30,7 +30,6 @@
             <p>{{ $tramite->fundamento_existencia ?? $tramite->fundamentoExtension }}</p>
 
             <h2 class="text-lg font-bold">Pasos</h2>
-            <h2 class="text-lg font-bold">Pasos</h2>
             @if (is_a($tramite->pasos, 'Illuminate\Support\Collection') && $tramite->pasos->count())
                 <ul class="list-decimal pl-5 space-y-2">
                     @foreach ($tramite->pasos as $paso)

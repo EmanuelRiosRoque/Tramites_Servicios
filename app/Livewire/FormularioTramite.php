@@ -356,14 +356,20 @@ class FormularioTramite extends Component
             if (!empty($this->formData['documentosRequeridos']) && is_array($this->formData['documentosRequeridos'])) {
                 foreach ($this->formData['documentosRequeridos'] as $documento) {
                     if (!empty($documento['base64'])) {
-                        // Prepara la información para la API
+                        // Evita duplicados
+                        $yaExiste = DocumentoFormatoRequerido::where('tramite_servicio_id', $this->tramiteServicioId)
+                            ->where('nombre_archivo', $documento['name'])
+                            ->where('tipo', 'documento')
+                            ->exists();
+            
+                        if ($yaExiste) continue;
+            
                         $infoApi = [
                             "metadata" => ["id_datoadicional" => 9, "area_tsjcdmx" => "DDMS"],
                             "filename" => $documento['name'],
                             "doc_base64" => $documento['base64'],
                         ];
             
-                        // Envía a la API
                         $client = new Client();
                         $response = $client->post(env('GESTOR_DOC_API'), [
                             'headers' => ['Content-Type' => 'application/json'],
@@ -371,7 +377,7 @@ class FormularioTramite extends Component
                         ]);
             
                         $responseData = json_decode($response->getBody(), true);
-                        $apiLink = $responseData['url'] ?? null; // en caso de que la API no regrese bien
+                        $apiLink = $responseData['url'] ?? null;
             
                         if ($apiLink) {
                             DocumentoFormatoRequerido::create([
@@ -379,32 +385,39 @@ class FormularioTramite extends Component
                                 'nombre_archivo' => $documento['name'],
                                 'tipo_archivo' => $documento['type'],
                                 'tamano_archivo' => $documento['size'],
-                                'tipo' => 'documento', // Aquí sigue siendo 'documento'
-                                'ruta_archivo' => $apiLink, // <- Aquí ahora guardas la URL pública
+                                'tipo' => 'documento',
+                                'ruta_archivo' => $apiLink,
                             ]);
                         }
                     }
                 }
             }
             
+            
             if (!empty($this->formData['formatosRequeridos']) && is_array($this->formData['formatosRequeridos'])) {
                 foreach ($this->formData['formatosRequeridos'] as $formato) {
                     if (!empty($formato['base64'])) {
-                        $nombreArchivo = preg_replace('/[^A-Za-z0-9.\-_]/', '_', $formato['name']); // Limpias el nombre
+                        $nombreArchivo = preg_replace('/[^A-Za-z0-9.\-_]/', '_', $formato['name']);
             
-                        // Prepara la información para la API
+                        $yaExiste = DocumentoFormatoRequerido::where('tramite_servicio_id', $this->tramiteServicioId)
+                            ->where('nombre_archivo', $formato['name'])
+                            ->where('tipo', 'formato')
+                            ->exists();
+            
+                        if ($yaExiste) continue;
+            
                         $infoApi = [
                             "metadata" => ["id_datoadicional" => 9, "area_tsjcdmx" => "DDMS"],
                             "filename" => $nombreArchivo,
                             "doc_base64" => $formato['base64'],
                         ];
             
-                        // Envía a la API
                         $client = new Client();
                         $response = $client->post(env('GESTOR_DOC_API'), [
                             'headers' => ['Content-Type' => 'application/json'],
                             'body' => json_encode($infoApi),
                         ]);
+            
                         $responseData = json_decode($response->getBody(), true);
                         $apiLink = $responseData['url'] ?? null;
             
@@ -414,13 +427,14 @@ class FormularioTramite extends Component
                                 'nombre_archivo' => $formato['name'],
                                 'tipo_archivo' => $formato['type'],
                                 'tamano_archivo' => $formato['size'],
-                                'tipo' => 'formato', // Aquí es 'formato'
-                                'ruta_archivo' => $apiLink, // <- Guardas la URL pública
+                                'tipo' => 'formato',
+                                'ruta_archivo' => $apiLink,
                             ]);
                         }
                     }
                 }
             }
+            
 
             // Primero eliminamos los montos anteriores
             MontoTramite::where('tramite_servicio_id', $this->tramiteServicioId)->delete();
