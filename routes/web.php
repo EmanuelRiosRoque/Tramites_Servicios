@@ -25,7 +25,7 @@ Route::middleware([
 
 Route::post('/tramite', [TramiteController::class, 'store'])->name('tramite.store');
 Route::get('/formulario/tramite/{id}', FormularioTramite::class)->name('formulario.tramite');
-Route::get('/consulta-tramite', ConsultaTramite::class)->name('consulta.tramite');
+Route::get('/consulta/tramite', ConsultaTramite::class)->name('consulta.tramite');
 Route::get('/vista/consulta/{id}', VistaPreviaPublica::class)->name('vista.consulta');
 Route::get('/consulta/publica', ConsultaPublica::class)->name('consulta.publica');
 Route::get('/consulta/usuarios', PanelUsuarios::class)->name('consulta.usuarios');
