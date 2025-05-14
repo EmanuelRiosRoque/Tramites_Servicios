@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CatalogoInmueblesSeeder::class,
             CatalogoEstatusSeeder::class,
-            RolesSeeder::class
+            RolesSeeder::class,
+            AreaSeeder::class,
         ]);
     }
 }

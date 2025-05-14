@@ -8,7 +8,7 @@ class="space-y-6">
     <x-form.input x-model="formData.plazoSolicitante" name="plazoSolicitante" label="Plazo con el que cuenta el solicitante para cumplir con la prevención" placeholder="Ingrese plazo" />
 
     <x-form.input 
-        tooltip="Plazo que tiene el sujeto obligado para resolver el trámite o servicio y en su caso si aplica la afirmativa o la negativa ficta"
+        tooltip="Fundamento jurídico del plazo para resolver el trámite o servicio, plazos de prevención y criterios de resolución"
         x-model.live="fundamentoPlazo"
         label="Fundamento Jurídico del plazo" 
         placeholder="Ingrese fundamento" 

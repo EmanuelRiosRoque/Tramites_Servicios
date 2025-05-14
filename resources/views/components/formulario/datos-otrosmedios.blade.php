@@ -30,7 +30,7 @@ $watch('correos', value => $wire.set('formData.correos', value));
                 class="inline-flex items-center gap-2 border border-cyan-400 text-cyan-700 font-medium bg-cyan-50 hover:bg-cyan-100 px-4 py-2 rounded-md text-sm transition duration-150 ease-in-out"
             >
                 <x-lucide-plus-circle class="w-4 h-4" />
-                Agregar telefono
+                Agregar teléfono
             </button>
         </div>
 
@@ -38,7 +38,7 @@ $watch('correos', value => $wire.set('formData.correos', value));
             <table class="min-w-full mt-4 text-sm text-gray-800 border-gray-400">
                 <thead class="bg-gray-100">
                     <tr>
-                        <th class="text-left px-4 py-2 border-b border-gray-300 font-semibold">Telefono</th>
+                        <th class="text-left px-4 py-2 border-b border-gray-300 font-semibold">Teléfono</th>
                         <th class="text-left px-4 py-2 border-b border-gray-300 font-semibold">Área</th>
                         <th class="text-right px-4 py-2 border-b border-gray-300 font-semibold">Eliminar</th>
                     </tr>
@@ -95,7 +95,7 @@ $watch('correos', value => $wire.set('formData.correos', value));
             <table class="min-w-full mt-4 text-sm text-gray-800 border-gray-400">
                 <thead class="bg-gray-100">
                     <tr>
-                        <th class="text-left px-4 py-2 border-b border-gray-300 font-semibold">Correo Electrónico</th>
+                        <th class="text-left px-4 py-2 border-b border-gray-300 font-semibold">Correo electrónico</th>
                         <th class="text-left px-4 py-2 border-b border-gray-300 font-semibold">Área</th>
                         <th class="text-right px-4 py-2 border-b border-gray-300 font-semibold">Eliminar</th>
                     </tr>

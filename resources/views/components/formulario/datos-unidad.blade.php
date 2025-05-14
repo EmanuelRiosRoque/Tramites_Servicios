@@ -7,56 +7,65 @@ class="space-y-6"
 >
                             
     <div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
+        <div class="grid grid-cols-1 md:grid-cols-6 gap-6">
+
             <!-- Inmueble -->
-            <x-form.select
-                x-model.live="id_inmueble"
-                label="Inmueble"
-                :options="[
-                    '' => 'Seleccione',
-                    '1' => 'Inmueble Niños Héroes No. 119',
-                    '2' => 'Inmueble Niños Héroes No. 132',
-                    '3' => 'Inmueble Niños Héroes No. 150',
-                    '4' => 'Inmueble Torre Norte',
-                    '5' => 'Inmueble Torre Sur',
-                    '6' => 'Inmueble Claudio Bernard',
-                    '7' => 'Inmueble Instituto de Ciencias Forenses',
-                    '8' => 'Inmueble Centro de Justicia alternativa',
-                    '9' => 'Inmueble Patriotismo',
-                    '10' => 'Inmueble Dr. Liceaga',
-                    '11' => 'Inmueble Dr. Lavista',
-                    '12' => 'Inmueble Clementina Gil de Léster',
-                    '13' => 'Inmueble Centro de Desarrollo Infantil Gloria Ledúc de Agüero',
-                    '14' => 'Inmueble Centro de Desarrollo Infantil José María Pino Suarez',
-                    '15' => 'Inmueble Centro de Desarrollo Infantil Niños Héroes',
-                    '16' => 'Inmueble Archivo Delicias',
-                    '17' => 'Inmueble Archivo – Fernando de Alva Ixtlilxóchitl',
-                    '18' => 'Inmueble Archivo Dr. Navarro',
-                    '20' => 'Inmueble Reclusorio Preventivo Norte',
-                    '21' => 'Inmueble Reclusorio Preventivo Sur',
-                    '23' => 'Inmueble Reclusorio Preventivo Oriente',
-                    '24' => 'Inmueble Reclusorio Preventivo Santa Martha Acatitla',
-                    '25' => 'Inmueble Plaza Juarez',
-                    '26' => 'Inmueble Lerma',
-                ]"
-                placeholder="Seleccione"
-            />
-
+            <div class="md:col-span-3">
+                <x-form.select
+                    x-model.live="id_inmueble"
+                    label="Inmueble"
+                    :options="[
+                        '' => 'Seleccione',
+                        '1' => 'Inmueble Niños Héroes No. 119',
+                        '2' => 'Inmueble Niños Héroes No. 132',
+                        '3' => 'Inmueble Niños Héroes No. 150',
+                        '4' => 'Inmueble Torre Norte',
+                        '5' => 'Inmueble Torre Sur',
+                        '6' => 'Inmueble Claudio Bernard',
+                        '7' => 'Inmueble Instituto de Ciencias Forenses',
+                        '8' => 'Inmueble Centro de Justicia alternativa',
+                        '9' => 'Inmueble Patriotismo',
+                        '10' => 'Inmueble Dr. Liceaga',
+                        '11' => 'Inmueble Dr. Lavista',
+                        '12' => 'Inmueble Clementina Gil de Léster',
+                        '13' => 'Inmueble Centro de Desarrollo Infantil Gloria Ledúc de Agüero',
+                        '14' => 'Inmueble Centro de Desarrollo Infantil José María Pino Suarez',
+                        '15' => 'Inmueble Centro de Desarrollo Infantil Niños Héroes',
+                        '16' => 'Inmueble Archivo Delicias',
+                        '17' => 'Inmueble Archivo – Fernando de Alva Ixtlilxóchitl',
+                        '18' => 'Inmueble Archivo Dr. Navarro',
+                        '20' => 'Inmueble Reclusorio Preventivo Norte',
+                        '21' => 'Inmueble Reclusorio Preventivo Sur',
+                        '23' => 'Inmueble Reclusorio Preventivo Oriente',
+                        '24' => 'Inmueble Reclusorio Preventivo Santa Martha Acatitla',
+                        '25' => 'Inmueble Plaza Juarez',
+                        '26' => 'Inmueble Lerma',
+                    ]"
+                    placeholder="Seleccione"
+                />
+            </div>
+        
             <!-- Piso -->
-            <x-form.input 
-                x-model.live="piso"
-                label="Piso" 
-                placeholder="Ingrese el piso"
-            />
-
+            <div class="md:col-span-1">
+                <x-form.input 
+                    x-model.live="piso"
+                    label="Piso" 
+                    placeholder="Ingrese el piso"
+                />
+            </div>
+        
             <!-- Unidad Administrativa -->
-            <x-form.input 
-                x-model.live="unidadAdministrativa"
-                label="Unidad Administrativa"
-                placeholder="Ingrese la unidad administrativa"
-            />
+            <div class="md:col-span-2">
+                <x-form.input 
+                    x-model.live="unidadAdministrativa"
+                    label="Unidad Administrativa"
+                    placeholder="Ingrese la unidad administrativa"
+                />
+            </div>
+        
         </div>
+        
+        
 
         <!-- Botón agregar domicilio -->
         <div>

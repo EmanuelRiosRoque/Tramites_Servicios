@@ -9,9 +9,6 @@ use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         // Crear los roles si no existen
@@ -19,12 +16,16 @@ class UserSeeder extends Seeder
         $revisorRole = Role::firstOrCreate(['name' => 'Revisor']);
         $registradorRole = Role::firstOrCreate(['name' => 'Registrador']);
 
+        // ID del área: DIRECCIÓN EJECUTIVA DE GESTIÓN TECNOLÓGICA
+        $areaId = 9;
+
         // Crear el usuario Administrador
         $admin = User::create([
             'name' => 'Administrador',
             'n_empleado' => '8009933',
             'email' => 'admin@example.com',
             'password' => Hash::make('12345678'),
+            'area_id' => $areaId,
         ]);
         $admin->assignRole($adminRole);
 
@@ -34,6 +35,7 @@ class UserSeeder extends Seeder
             'n_empleado' => '8009934',
             'email' => 'revisor@example.com',
             'password' => Hash::make('12345678'),
+            'area_id' => $areaId,
         ]);
         $revisor->assignRole($revisorRole);
 
@@ -43,6 +45,7 @@ class UserSeeder extends Seeder
             'n_empleado' => '8009935',
             'email' => 'registrador@example.com',
             'password' => Hash::make('12345678'),
+            'area_id' => $areaId,
         ]);
         $registrador->assignRole($registradorRole);
     }

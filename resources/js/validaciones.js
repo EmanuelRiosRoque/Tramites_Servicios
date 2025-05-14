@@ -93,7 +93,7 @@ export default (wire = null, validar = true, documentosGuardados) => ({ // ← N
             case 'datos':
                 if (!formData.modalidad) this.camposInvalidos.push('modalidad');
                 if (!formData.fundamentoExtension) this.camposInvalidos.push('fundamentoExtension');
-                if (!formData.areaObligada) this.camposInvalidos.push('areaObligada');
+                // if (!formData.areaObligada) this.camposInvalidos.push('areaObligada');
                 if (!formData.nombreTramite) this.camposInvalidos.push('nombreTramite');
                 if (!formData.descripcionTramite) this.camposInvalidos.push('descripcionTramite');
                 return this.camposInvalidos.length === 0;

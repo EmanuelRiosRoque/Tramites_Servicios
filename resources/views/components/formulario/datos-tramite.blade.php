@@ -1,21 +1,11 @@
 <div>
     <x-form.input x-model="formData.modalidad" name="modalidad" label="Modalidad" placeholder="Modalidad" />
-    <x-form.input x-model="formData.fundamentoExtension" name="fundamentoExtension" label="Fundamento Jurídico" placeholder="Ingrese Fundamento" />
+    <x-form.input x-model="formData.fundamentoExtension" name="fundamentoExtension" label="Fundamento Jurídico de la Existencia del Trámite o Servicio" placeholder="Ingrese Fundamento" />
     <x-form.select
         x-model="formData.areaObligada"
         name="areaObligada"
         label="Área obligada responsable"
-        :options="[
-            '' => 'Seleccione',
-            '1' => 'Dirección Ejecutiva de Gestión Tecnológica',
-            '2' => 'Dirección de Gestión Tecnológica',
-            '3' => 'Dirección de Desarrollo y Mantenimiento de Sistemas',
-            '4' => 'Dirección de Operación y Control',
-            '5' => 'Dirección de Comunicaciones y Seguridad',
-            '6' => 'Dirección de Ingeniería y Soporte a la Oralidad',
-            '7' => 'Coordinación de Proyectos',
-            '8' => 'Difusión y Diseño'
-        ]"
+        :options="$areas"
         placeholder="Seleccione"
     />
 

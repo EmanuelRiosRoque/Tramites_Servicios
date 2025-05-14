@@ -1,6 +1,8 @@
 <div x-data="validaciones($wire, {{ $fk_estatus === 1 ? 'true' : 'false' }}), @js($documentosGuardados)">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <h1 class="text-2xl font-bold px-6 py-4">Ingresa los datos solicitados</h1>
+        <div class=" flex justify-center">
+            <h1 class="text-2xl font-bold px-6 py-4">Ingresa los datos solicitados</h1>
+        </div>
         <div class=" overflow-hidden  sm:rounded-lg">
             @if ($tramite->fk_estatus == 3 && $tramite->motivo_rechazo)
             <p class="bg-red-100 text-red-700 p-3 rounded mb-4">
@@ -14,26 +16,52 @@
 
                 <!-- Formulario -->
                 <div class="flex-1">
-                    <x-form.formulario-tabs :documentos-guardados="$documentosGuardados" :fkestatus="$fk_estatus"
-                        :tramite-servicio-id="$tramiteServicioId" :mostrarMotivoRechazo="$mostrarMotivoRechazo"
-                        :descripcion_rechazo="$descripcion_rechazo" />
+                    <x-form.formulario-tabs 
+                        :documentos-guardados="$documentosGuardados" 
+                        :fkestatus="$fk_estatus"
+                        :tramite-servicio-id="$tramiteServicioId" 
+                        :mostrarMotivoRechazo="$mostrarMotivoRechazo"
+                        :descripcion_rechazo="$descripcion_rechazo" 
+                        :areas="$areas" 
+                    />
 
                     <!-- Botones Anterior / Siguiente -->
                     <div class="flex items-center justify-between">
                         <!-- IZQUIERDA: Botón Guardar -->
                         <div>
                             @if ($fk_estatus == 1)
-                            <button type="button"
-                                wire:click="submit"
-                                x-show="currentIndex !== tabs.length - 1"
-                                class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 transition"
-                                wire:loading.attr="disabled"
-                                wire:target="submit"
-                            >
-                                Guardar
-                            </button>
+                                <!-- Botón visible en todos los tabs excepto el último -->
+                                <button type="button"
+                                    wire:click="submit"
+                                    x-show="currentIndex !== tabs.length - 1"
+                                    class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 transition"
+                                    wire:loading.attr="disabled"
+                                    wire:target="submit"
+                                >
+                                    Guardar
+                                </button>
+                        
+                                <!-- Botón visible solo en el último tab -->
+                                <button type="button"
+                                    @click="enviarFormularioAccion('submit')"
+                                    x-show="currentIndex === tabs.length - 1"
+                                    class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-6 rounded shadow flex items-center gap-2"
+                                    wire:loading.attr="disabled"
+                                    wire:target="submit"
+                                >
+                                    <span wire:loading.remove wire:target="submit">Guardar</span>
+                                    <span wire:loading wire:target="submit" class="flex items-center gap-2">
+                                        <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+                                            <path class="opacity-75" fill="currentColor"
+                                                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                                        </svg>
+                                    </span>
+                                </button>
                             @endif
                         </div>
+                        
                     
                         <!-- DERECHA: Anterior / Siguiente -->
                         <div class="flex items-center space-x-4">
@@ -106,7 +134,7 @@
                                     </span>
                                 </button>
             
-                                <button type="button" @click="enviarFormularioAccion('submit')"
+                                {{-- <button type="button" @click="enviarFormularioAccion('submit')"
                                     class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-6 rounded shadow flex items-center gap-2"
                                     wire:loading.attr="disabled" wire:target="submit">
                                     <span wire:loading.remove wire:target="submit">Guardar</span>
@@ -118,7 +146,7 @@
                                                 d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
                                         </svg>
                                     </span>
-                                </button>
+                                </button> --}}
                             @endif
             
                             @if (auth()->user()->hasRole('Revisor') && $fk_estatus == 2)

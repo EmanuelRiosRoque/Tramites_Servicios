@@ -132,7 +132,7 @@
                 foreach ($tramite->inmueblesTramite as $inmueble) {
                     $unidad = $inmueble->unidad_administrativa;
                     $areas[$unidad]['unidad'] = $unidad;
-                    $areas[$unidad]['inmueble'] = $inmueble->inmueble->nombre_inmueble ?? 'Sin nombre';
+                    $areas[$unidad]['inmueble'] = $inmueble->inmueble->direccion ?? 'Sin nombre';
                     $areas[$unidad]['pisos'][] = $inmueble->piso; // ahora es array
                 }
 
@@ -153,7 +153,7 @@
                 foreach ($tramite->domicilios as $domicilio) {
                     $unidad = $domicilio['unidad'] ?? 'Desconocida';
                     $areas[$unidad]['unidad'] = $unidad;
-                    $areas[$unidad]['inmueble'] = $domicilio['nombre_inmueble'] ?? 'Sin nombre';
+                    $areas[$unidad]['inmueble'] = $domicilio['direccion'] ?? 'Sin nombre';
                     $areas[$unidad]['pisos'][] = $domicilio['piso'] ?? null;
                 }
 
@@ -240,22 +240,32 @@
         
          
 
-        <h2 class="text-lg font-bold">Requisitos</h2>
-        @if ($tramite->requisitos && is_a($tramite->requisitos, 'Illuminate\Support\Collection') && $tramite->requisitos->count())
+        <h2 class="text-lg font-bold">Sitios web</h2>
+
+        @if ($tramite->sitiosWeb && $tramite->sitiosWeb instanceof \Illuminate\Support\Collection && $tramite->sitiosWeb->count())
             <ul class="list-decimal pl-5 space-y-2">
-                @foreach ($tramite->requisitos as $requisito)
-                    <li>{{ $requisito->requisito }}</li>
+                @foreach ($tramite->sitiosWeb as $sitio)
+                    <li>
+                        <a href="{{ $sitio->sitio }}" target="_blank" class="text-blue-600 underline">
+                            {{ $sitio->sitio }}
+                        </a>
+                    </li>
                 @endforeach
             </ul>
-        @elseif (!empty($tramite->requisitos) && is_array($tramite->requisitos))
+        @elseif (!empty($tramite->sitiosWebs) && is_array($tramite->sitiosWebs))
             <ul class="list-decimal pl-5 space-y-2">
-                @foreach ($tramite->requisitos as $requisito)
-                    <li>{{ $requisito }}</li>
+                @foreach ($tramite->sitiosWebs as $sitio)
+                    <li>
+                        <a href="{{ $sitio }}" target="_blank" class="text-blue-600 underline">
+                            {{ $sitio }}
+                        </a>
+                    </li>
                 @endforeach
             </ul>
         @else
-            <p class="text-gray-500">No hay requisitos registrados.</p>
+            <p class="text-gray-500">No hay sitios web registrados.</p>
         @endif
+        
         
 
             <h2 class="text-lg font-bold mt-8">Objetivo de la inspección y verificación:</h2>

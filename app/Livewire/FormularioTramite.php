@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Area;
 use App\Models\Paso;
 use GuzzleHttp\Client;
 use Livewire\Component;
@@ -20,8 +21,8 @@ use App\Models\CatalogoInmueble;
 use App\Models\FundamentoRequisito;
 use Illuminate\Support\Facades\Storage;
 use App\Models\DocumentoFormatoRequerido;
-use App\Models\tramiteServicioPublicadoMongo;
 use Devrabiul\ToastMagic\Facades\ToastMagic;
+use App\Models\tramiteServicioPublicadoMongo;
 
 #[Layout('layouts.app')]
 class FormularioTramite extends Component
@@ -32,6 +33,7 @@ class FormularioTramite extends Component
     public $tab;
     public $mostrarMotivoRechazo = false;
     public $descripcion_rechazo = '';
+    public $area_usuario;
     public $formData = [
         // Datos generales del trámite
         'modalidad' => '',
@@ -112,6 +114,8 @@ class FormularioTramite extends Component
 
     public function mount($id)
     {
+        $this->area_usuario = auth()->user()->area_id;
+
         if ($id) {
             $tramite = TramiteServicio::with(
                 'pasos',
@@ -148,7 +152,7 @@ class FormularioTramite extends Component
                 //   Cargamos todos los datos al formData
                 $this->formData = array_merge($this->formData, [
                     'modalidad' => $tramite->modalidad,
-                    'areaObligada' => $tramite->fk_areasObligada,
+                    'areaObligada' => $tramite->fk_areasObligada ?? $this->area_usuario,
                     'nombreTramite' => $tramite->nombre_tramite,
                     'descripcionTramite' => $tramite->descripcion,
                     'tipo' => $tramite->tipo,
@@ -209,6 +213,7 @@ class FormularioTramite extends Component
                             return [
                                 'id_inmueble' => $inmueble->id_inmueble,
                                 'nombre_inmueble' => $catalogo ? $catalogo->nombre_inmueble : 'Desconocido',
+                                'direccion' => $catalogo ? $catalogo->direccion : 'Desconocido',
                                 'piso' => $inmueble->piso,
                                 'unidad' => $inmueble->unidad_administrativa,
                             ];
@@ -664,6 +669,8 @@ class FormularioTramite extends Component
 
     public function render()
     {
-        return view('livewire.formulario-tramite');
+        return view('livewire.formulario-tramite', [
+            'areas' => Area::pluck('nombre', 'id')->toArray()
+        ]);
     }
 }

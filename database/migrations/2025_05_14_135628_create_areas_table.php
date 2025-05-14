@@ -6,18 +6,23 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('catalogo_inmuebles', function (Blueprint $table) {
+        Schema::create('areas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_inmueble');
-            $table->string('direccion')->nullable(); // campo para dirección, puede ser nulo
+            $table->string('nombre');
             $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('catalogo_inmuebles');
+        Schema::dropIfExists('areas');
     }
 };

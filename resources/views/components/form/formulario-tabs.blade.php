@@ -1,7 +1,7 @@
 <form wire:submit.prevent="submit" class="flex-1 sm:p-8 sm:pl-20 p-5 max-w-2xl" x-data="{ formData: $wire.formData }">
 
     <div x-show="tab === 'datos'" x-cloak>
-        <x-formulario.datos-tramite /> 
+        <x-formulario.datos-tramite :areas="$areas"/> 
     </div>
 
     <div x-show="tab === 'pasos'" x-cloak>
@@ -131,7 +131,7 @@
                 label="Vigencia de los avisos, permisos, licencias, autorizaciones, registros y demás resoluciones que se emitan"
                 placeholder="Ingrese vegencia" />
             <x-form.input x-model=formData.fundamentoVigencia name="fundamentoVigencia"
-                label="Fundamento Jurídico Vigencia" placeholder="Ingrese fundamento" />
+                label="Fundamento Jurídico de la Vigencia" placeholder="Ingrese fundamento" />
         </div>
     </div>
 
@@ -154,12 +154,13 @@
 
     <div x-show="tab === 'informacion'" x-cloak>
         <div>
-            <x-form.input x-model=formData.informacion name="informacion"
-                label="Informacion que debera conservar para fines de acreditacion, inspeccion y verificacion con motivo del tramite o servicio"
-                placeholder="Ingrese informacion" />
-            <x-form.input x-model=formData.fundamentoInformacion name="fundamentoInformacion"
-                label="Fundamento Jurídico de la Información" placeholder="Ingrese fundamento" />
-        </div>
+            <x-form.input x-model="formData.informacion" name="informacion"
+                label="Información que deberá conservar para fines de acreditación, inspección y verificación con motivo del trámite o servicio"
+                placeholder="Ingrese información" />
+        
+            <x-form.input x-model="formData.fundamentoInformacion" name="fundamentoInformacion"
+                label="Fundamento jurídico de la información" placeholder="Ingrese fundamento" />
+        </div>        
     </div>
 
     <div x-show="tab === 'estrategia'" x-cloak>
