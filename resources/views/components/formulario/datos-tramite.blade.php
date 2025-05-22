@@ -7,6 +7,7 @@
         label="Área obligada responsable"
         :options="$areas"
         placeholder="Seleccione"
+        :disable="!auth()->user()->hasRole('Administrador')" 
     />
 
     <x-form.input x-model="formData.nombreTramite" name="nombreTramite" label="Nombre del Trámite" placeholder="Nombre" />

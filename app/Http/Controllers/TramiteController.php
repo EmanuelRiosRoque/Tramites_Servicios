@@ -26,6 +26,7 @@ class TramiteController extends Controller
                 'descripcion' => $request->descripcionTramite,
                 'tipo' => $request->tipo,
                 'formato_requerido' => $request->formato,
+                'fk_areasObligada' => auth()->user()->area_id,
                 'fk_estatus' => 1,
             ]);
 
