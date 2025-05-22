@@ -67,10 +67,10 @@
                     </div>
 
                     <div class="flex items-center justify-between">
-                        <a href="{{ route('password.request') }}"
+                        {{-- <a href="{{ route('password.request') }}"
                             class="inline-block text-sm font-semibold bg-orange-400 text-white rounded px-4 py-2 hover:bg-orange-500 transition">
                                 ¿Olvidaste tu contraseña?
-                            </a>
+                            </a> --}}
 
                         <x-button class="bg-teal-600 hover:bg-teal-700 focus:bg-teal-700 active:bg-teal-900 focus:ring-teal-500">
                             Ingresar
