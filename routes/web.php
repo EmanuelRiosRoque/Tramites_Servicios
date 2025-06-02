@@ -9,7 +9,7 @@ use App\Livewire\PanelUsuarios;
 use App\Livewire\VistaPreviaPublica;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::middleware([
