@@ -290,20 +290,26 @@
                     <p>{{ $tramite->nombre_tramite ?? $tramite->nombreTramite}}</p>
                 </div>
             
+                @php
+                    // Convertimos a string si es un array
+                    $tipoTexto = is_array($tramite->tipo) ? implode(', ', $tramite->tipo) : $tramite->tipo;
+
+                    // Normalizamos el texto en minúsculas
+                    $tipoTexto = strtolower($tipoTexto);
+
+                    // Corregimos las palabras específicas con acento y mayúscula inicial
+                    $tipoTexto = str_replace(['tramite', 'servicio'], ['Trámite', 'Servicio'], $tipoTexto);
+                @endphp
                 <div>
                     <strong>Tipo:</strong>
-                    <p>{{ is_array($tramite->tipo) ? implode(', ', $tramite->tipo) : $tramite->tipo }}</p>
+                    <p>{{ $tipoTexto }}</p>
                 </div>
                 
 
-                @php
-                    $texto = strtolower($tramite->modalidad); // Convertimos todo a minúsculas para normalizar
-                    $texto = str_replace('tramite', 'Trámite', $texto);
-                    $texto = str_replace('servicio', 'Servicio', $texto);
-                @endphp
+          
                 <div>
                     <strong>Modalidad:</strong>
-                    <p>{{ ucfirst($texto) }}</p>
+                    <p>{{ $tramite->modalidad }}</p>
                 </div>
             
                 <div>
