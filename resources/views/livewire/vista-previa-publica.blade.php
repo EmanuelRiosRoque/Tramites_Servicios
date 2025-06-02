@@ -295,9 +295,15 @@
                     <p>{{ is_array($tramite->tipo) ? implode(', ', $tramite->tipo) : $tramite->tipo }}</p>
                 </div>
                 
+
+                @php
+                    $texto = strtolower($tramite->modalidad); // Convertimos todo a minúsculas para normalizar
+                    $texto = str_replace('tramite', 'Trámite', $texto);
+                    $texto = str_replace('servicio', 'Servicio', $texto);
+                @endphp
                 <div>
                     <strong>Modalidad:</strong>
-                    <p>{{ $tramite->modalidad }}</p>
+                    <p>{{ ucfirst($texto) }}</p>
                 </div>
             
                 <div>
@@ -381,7 +387,7 @@
                 </div>
 
                 <div>
-                    <strong>Demas datos relativos a cualquier otro medio que pemita el envio de consulta, documentos y quejas</strong>
+                    <strong>Demás datos relativos a cualquier otro medio que permita el envío de consultas, documentos y quejas:</strong>
                     <p>{{ $tramite->demas_informacion ?? $tramite->demasDatosRelativos}}</p>
                 </div>
             </div>
